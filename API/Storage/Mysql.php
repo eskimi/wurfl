@@ -28,6 +28,7 @@ class WURFL_Storage_Mysql extends WURFL_Storage_Base {
 		"db" => "wurfl_persistence_db",	
 		"user" => "",
 		"pass" => "",
+		"socket" => null,
 		"table" => "wurfl_object_cache",
 		"keycolumn" => "key",
 		"valuecolumn" => "value"
@@ -39,6 +40,7 @@ class WURFL_Storage_Mysql extends WURFL_Storage_Base {
 	private $user;
 	private $pass;
 	private $port;
+	private $socket;
 	private $table;
 	private $keycolumn;
 	private $valuecolumn;
@@ -55,7 +57,7 @@ class WURFL_Storage_Mysql extends WURFL_Storage_Base {
 		$this->_ensureModuleExistance();
 
 		/* Initializes link to MySql */
-		$this->link = mysqli_connect($this->host,$this->user,$this->pass, null,$this->port);
+		$this->link = mysqli_connect($this->host,$this->user,$this->pass, null,$this->port, $this->socket);
 		if (!$this->link || mysqli_error($this->link)) {
 			throw new WURFL_Storage_Exception("Couldn't link to $this->host (".mysqli_error($this->link).")");
 		}
